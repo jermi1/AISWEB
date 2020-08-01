@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewData["Title"] = "Usuarios";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+@model AISWEB.Models.DataPaginador<RegistrarMO>
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left" style="text-align:right;">
+                <h3>Usuarios</h3>
+            </div>
+            <div class="form-group title_right" style="margin-bottom:-3px;width:640px; margin-left: 40px">
+                <form asp-area="Usuarios" asp-controller="Usuarios" asp-action="Usuarios" method="get">
+                    <div class="col-md-5 col-sm-5  form-group pull-right top_search">
+                        <div class="input-group">
+                            <input type="text" id="filtrar" name="filtrar" class="form-control" placeholder="Buscar">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit" value="Buscar"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        .
+
+        <div class="x_panel">
+
+
+            @*<div class="x_panel">*@
+            <div class="x_content">
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="text-left" style="margin-right:50px"><a asp-area="Usuarios" asp-page="/Cuentas/Registrar"><button asp-area="Usuarios" asp-page="/Cuentas/Registrar" class="btn btn-outline-primary"><i class="fa fa-plus"></i> Añadir Usuario </button></a></div>
+                        <br />
+                    </div>
+                    <div class="col-4">
+
+                    </div>
+                    <div class="col-4">
+                        <form asp-area="Usuarios" asp-controller="Usuarios" asp-action="Usuarios" method="get">
+                            <div class="row" style="width: 300px; margin-left: 130px">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input type="number" name="registros" class="form-control" value="3" min="1" max="50" step="1">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input type="submit" class="btn btn-success" value="Nº Registros">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="row">
+                    @*tarjeta de Usuario *@
+                    @foreach (var item in Model.List)
+                    {
+                        var imagen = item.Email + ".png";
+                        <div class="col-md-4 col-sm-4 col-4 profile_details">
+                            <div class="well profile_view" style="        min-height: 235px
+">
+                                <div class="col-sm-12">
+                                    <h4 class="brief"><i>@Html.DisplayFor(modelItem => item.Rol)</i></h4>
+                                    <div class="left col-md-7 col-sm-7">
+                                        <h2>@Html.DisplayFor(modelItem => item.Nombre) @Html.DisplayFor(modelItem => item.Apellido)</h2>
+                                        <p><strong>Datos: </strong> </p>
+                                        <ul>
+                                            <li><i class="fa fa-check-circle-o"></i> N° Doc: @Html.DisplayFor(modelItem => item.NID) </li>
+                                            <li><i class="fa fa-building"></i> Email: @Html.DisplayFor(modelItem => item.Email) </li>
+                                            <li><i class="fa fa-phone"></i> Telefono: @Html.DisplayFor(modelItem => item.Telefono) </li>
+                                        </ul>
+                                    </div>
+                                    <div class="right col-md-5 col-sm-5 text-center" id="iiimg">
+                                        <img src="~/img/fotosUpload/Usuarios/@imagen" alt="" class="img-circle img-fluid">
+                                    </div>
+                                </div>
+                                <div class=" profile-bottom">
+                                    <div class=" col-sm-6 emphasis">
+                                        @* <p class="ratings">
+                                                <a>4.0</a>
+                                                <a href="#"><span class="fa fa-star"></span></a>
+                                                <a href="#"><span class="fa fa-star"></span></a>
+                                                <a href="#"><span class="fa fa-star"></span></a>
+                                                <a href="#"><span class="fa fa-star"></span></a>
+                                                <a href="#"><span class="fa fa-star-o"></span></a>
+                                            </p>*@
+                                    </div>
+                                    <div class="col-sm-6 emphasis" style="margin-left:262px">
+                                        <a asp-area="Usuarios" asp-page="/Cuentas/Registrar" asp-route-id="@item.Email" type="button" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-edit">
+                                            </i>
+                                        </a>
+                                        <a asp-area="Usuarios" asp-page="/Eliminar/Eliminar" asp-route-id="@item.Email" type="button" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"> </i>
+                                            </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="text-center">
+        Resultados @Html.Raw(Model.Pagi_info);
+        <br />
+        @Html.Raw(Model.Pagi_navegacion)
+    </div>
+</div>
+<!-- /page content -->
+

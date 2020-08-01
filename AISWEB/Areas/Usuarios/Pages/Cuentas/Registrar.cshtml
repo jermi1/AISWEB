@@ -1,0 +1,124 @@
+﻿@page
+@model RegistrarModel
+@{
+}
+
+<div class="right_col" role="main">
+    <form method="post" enctype="multipart/form-data">
+        <div class="cont">
+
+            <div class="row">
+                <div class="page-title" style="margin-bottom:30px">
+                    <div class="title_left" style="text-align:center;margin-left:230px">
+                        <h3>Registrar Usuario</h3>
+                    </div>
+                
+                </div>
+              
+
+                <div class="col-4">
+
+
+                    <div class="card" style="width: 350px">
+                        <br />
+                        <span style="text-align: center">Foto o imagen</span>
+                        <br />
+                        <div style="width: 300px;margin:auto">
+                            <output id="imageRgistrar">
+                                <img src="~/Tema/production/images/default.png" class="card-img-top" style="width: 300px;">
+                             </output>
+                        </div>
+                        <hr />
+                        <div class="card-body">
+                            @*<h5 class="card-title">Card title</h5>*@
+                            <div class="div_file input">
+                                <span id="addfile" style="margin:5px"><i class="fa fa-upload" style="margin-right:5px"></i>Subir Archivo</span>
+                                <input asp-for="Input.ImagenAvatarU"  accept="image/*" type="file" id="files"/>
+                                @*<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>*@
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6" style="margin-top: 12px;margin-left:12px">
+                 
+                    <div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Input.Nombre"></label>
+                                <input asp-for="Input.Nombre" placeholder="Nombre" type="text" class="form-control is-valid" id="validationServer01" required>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Input.Apellido"></label>
+                                <input asp-for="Input.Apellido" placeholder="Apellido" type="text" class="form-control is-valid" id="validationServer02" required>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Input.NID"></label>
+                                <input asp-for="Input.NID" placeholder="Nº identidad" type="number" class="form-control is-valid" id="validationServer03" required>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Input.Telefono"></label>
+                                <input asp-for="Input.Telefono" placeholder="Nº Telefono" type="number" maxlength="9" class="form-control is-valid" id="validationServer04" required>
+                                 <span asp-validation-for="Input.Telefono" class="text-danger"></span>
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Input.Email"></label>
+                                <input asp-for="Input.Email" placeholder="Email" type="text" class="form-control is-valid" id="validationServer05" required>
+                                <div class="valid-feedback">
+                                    correcto!
+                                </div>
+                            </div>
+                            <div class="input-group col-md-6 mb-3">
+                            <label asp-for="Input.Rol"></label>
+                                @Html.DropDownList("Input.Rol", new SelectList(Model.Input.listaRoles, "Text", "Text"), "Seleccione un rol", new { @class = "custom-select is-valid", style = "width: 100%; margin-top: -20px;" })
+                                <div class="invalid-feedback">
+                                    Please select a valid state.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div id="divPassword" class="col-md-6 mb-3">
+                                <label asp-for="Input.Password"></label>
+                                <input asp-for="Input.Password" placeholder="Contraseña" class="form-control is-valid" required>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div style="text-align:right">
+                            <button class="btn btn-info btn-block" type="submit"><i class="fa fa-plus" style="margin-right:10px"></i>Registrar</button>
+                        </div>
+
+                     </div>
+                    <div>
+                        <label id="errorRegistrar" class="alert-danger">@Html.DisplayFor(m => m.Input.ErrorMessage)</label>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
